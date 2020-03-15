@@ -1,4 +1,4 @@
-from flask_restful import Resource, Api, reqparse
+from flask_restful import Resource
 from country_info import CountryInfo
 
 class DataHandler(Resource):
