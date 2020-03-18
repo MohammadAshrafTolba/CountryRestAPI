@@ -16,5 +16,6 @@ class CountryInfo:
         # checking fot requests exceptions
         except requests.RequestException:
             return None
-
-        return response
+        if len(response) == 0:
+            return None
+        return response[0]

@@ -1,5 +1,5 @@
 from flask_restful import Resource, reqparse
-from country_info import CountryInfo
+from API.country_info import CountryInfo
 
 class ResponseHandler(Resource):
 
