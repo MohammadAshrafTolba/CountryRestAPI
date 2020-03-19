@@ -22,10 +22,10 @@ class ResponseHandler(Resource):
         if arguments['key'] is None:
             return self.invalid_info
         info = arguments['key'].split(',')
-        resp = self.get_info_from_public_api(name, info)
+        resp = self.get_info(name, info)
         return resp
 
-    def get_info_from_public_api(self, name, info):
+    def get_info(self, name, info):
         country_info = self.country_info.get_info(name)
         if country_info is None:
             return self.public_api_error
