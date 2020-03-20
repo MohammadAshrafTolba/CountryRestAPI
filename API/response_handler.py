@@ -1,39 +1,31 @@
-from flask_restful import Resource, reqparse
 from API.country_info import CountryInfo
-
-class ResponseHandler(Resource):
+import json
+class ResponseHandler:
 
     def __init__(self):
-
         self.country_info = CountryInfo()
+        self.keys = []
+        self.invalid_info = {'error': 'keys field is empty or invalid'}
+        self.public_api_error = {'error': 'public api error'}
 
-        # defining keys in the url
-
-        self.parser = reqparse.RequestParser()
-        self.parser.add_argument('key')
-
-        # specifying error messages
-
-        self.invalid_info = {'message': 'specification field is empty or invalid'}
-        self.public_api_error = {'message': 'public api is not reachable'}
-
-    def get(self, name):
-        arguments = self.parser.parse_args()
-        if arguments['key'] is None:
-            return self.invalid_info
-        info = arguments['key'].split(',')
-        resp = self.get_info(name, info)
-        return resp
-
-    def get_info(self, name, info):
-        country_info = self.country_info.get_info(name)
-        if country_info is None:
+    def get(self, name, keys):
+        data = self.country_info.get_info(name)
+        if data is None:
             return self.public_api_error
-        if 'all' in info:
-            return country_info
-        response = {}
-        for i in info:
-            if i not in country_info:
-                return self.invalid_info
-            response[i] = country_info[i]
+        response = self.filter(keys, data)
         return response
+
+    def get_all_info(self, name):
+        data = self.country_info.get_info(name)
+        if data is None:
+            return self.public_api_error
+        return data
+
+    def filter(self, keys, data):
+        self.keys_list = keys.split('+')
+        filtered_data = {}
+        for i in self.keys_list:
+            if i not in data:
+                return self.invalid_info
+            filtered_data[i] = data[i]
+        return filtered_data

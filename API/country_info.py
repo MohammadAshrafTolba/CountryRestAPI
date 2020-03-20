@@ -16,6 +16,7 @@ class CountryInfo:
         # checking fot requests exceptions
         except requests.RequestException:
             return None
-        if len(response) == 0:
+
+        if response == {'status': 404, 'message': 'Not Found'} or len(response) == 0:
             return None
         return response[0]

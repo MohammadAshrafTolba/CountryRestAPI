@@ -5,15 +5,9 @@ from API.response_handler import ResponseHandler
 
 class MyTestCase(unittest.TestCase):
 
-    def test_empty_info(self):
-        self.handler = ResponseHandler()
-        url = 'http://localhost:5000/country/name/egypt?key='
-        response = requests.get(url).json()
-        self.assertEqual(response, self.handler.invalid_info)
-
     def test_valid_request(self):
         self.handler = ResponseHandler()
-        url = 'http://localhost:5000/country/name/egypt?key=capital,name'
+        url = 'http://localhost:5000/country/name/egypt/keys/capital+name'
         response = requests.get(url).json()
         expected_data = {
             'capital': 'Cairo',
@@ -23,13 +17,13 @@ class MyTestCase(unittest.TestCase):
 
     def test_public_api_error(self):
         self.handler = ResponseHandler()
-        url = 'http://localhost:5000/country/name/invalid_country?info=name'
+        url = 'http://localhost:5000/country/name/invalid_country/keys/name'
         response = requests.get(url).json()
-        self.assertEqual(response, self.handler.invalid_info)
+        self.assertEqual(response, self.handler.public_api_error)
 
     def test_invalid_request_wrong_info(self):
         self.handler = ResponseHandler()
-        url = 'http://localhost:5000/country/name/egypt?key='
+        url = 'http://localhost:5000/country/name/egypt/keys/invalid_key'
         response = requests.get(url).json()
         self.assertEqual(response, self.handler.invalid_info)
 
