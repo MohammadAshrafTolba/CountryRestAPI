@@ -54,6 +54,22 @@ class MyTestCase(unittest.TestCase):
         self.assertEqual(expected, response)
 
 
+        #   Testing the filter(keys, data) function
+
+    def test_filter_with_valid_keys(self):
+        handler = ResponseHandler()
+        handler.country_info = CountryInfoPlaceHolder({"capital": "Cairo", "demonym": "Egyptian"})
+        response = handler.get('egypt', 'capital+demonym')
+        expected = {"capital": "Cairo", "demonym": "Egyptian"}
+        self.assertEqual(expected, response)
+
+    def test_filter_with_unvalid_keys(self):
+        handler = ResponseHandler()
+        handler.country_info = CountryInfoPlaceHolder({"capital": "Cairo", "demonym": "Egyptian"})
+        response = handler.get('egypt', 'capital+unvalid_key')
+        self.assertEqual(handler.invalid_info, response)
+
+
         #   Testing the get_info(name) function in the CountryInfo class
         #   Require internet connection
 
