@@ -1,4 +1,4 @@
-import unittest
+import unittest2
 import json
 from API.response_handler import ResponseHandler
 from API.country_info import CountryInfo
@@ -10,7 +10,7 @@ class CountryInfoPlaceHolder:       #   To make tests available offline
     def get_info(self, name):
         return self.input
 
-class MyTestCase(unittest.TestCase):
+class MyTestCase(unittest2.TestCase):
 
 
         #   Testing the get_info(name, info) function

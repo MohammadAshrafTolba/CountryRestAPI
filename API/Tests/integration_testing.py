@@ -1,9 +1,9 @@
-import unittest
+import unittest2
 import requests
 from API.response_handler import ResponseHandler
 
 
-class MyTestCase(unittest.TestCase):
+class MyTestCase(unittest2.TestCase):
 
     def test_valid_request(self):
         self.handler = ResponseHandler()
