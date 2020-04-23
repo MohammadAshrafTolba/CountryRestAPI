@@ -1,5 +1,6 @@
 unittest2
 requests
-json
 flask
 flask_restful
+requests_cache
+
