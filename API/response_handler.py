@@ -1,5 +1,4 @@
 from API.country_info import CountryInfo
-import json
 class ResponseHandler:
 
     def __init__(self):
