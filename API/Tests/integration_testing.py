@@ -28,4 +28,4 @@ class MyTestCase(unittest2.TestCase):
         self.assertEqual(response, self.handler.invalid_info)
 
 if __name__ == '__main__':
-    unittest.main()
+    unittest2.main()
