@@ -1,4 +1,5 @@
 import requests
+import json
 
 class CountryInfo:
 
@@ -12,11 +13,13 @@ class CountryInfo:
 
         try:
         # return the required info ftom the url
-            response = requests.get(url).json()
-        # checking fot requests exceptions
+            response = requests.get(url)
+            if response.status_code == 200:
+                if response.from_cache:
+                    print("Caching...")
+                return json.loads(response.content)[0]
+            else:
+                return None
+        # checking for requests exceptions
         except requests.RequestException:
             return None
-
-        if response == {'status': 404, 'message': 'Not Found'} or len(response) == 0:
-            return None
-        return response[0]

@@ -7,7 +7,7 @@ class MyTestCase(unittest2.TestCase):
 
     def test_valid_request(self):
         self.handler = ResponseHandler()
-        url = 'http://localhost:5000/country/name/egypt/keys/capital+name'
+        url = 'http://localhost:5000/country/name/egypt/keys/capital,name'
         response = requests.get(url).json()
         expected_data = {
             'capital': 'Cairo',

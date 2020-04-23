@@ -21,7 +21,7 @@ class ResponseHandler:
         return data
 
     def filter(self, keys, data):
-        self.keys_list = keys.split('+')
+        self.keys_list = keys.split(',')
         filtered_data = {}
         for i in self.keys_list:
             if i not in data:
