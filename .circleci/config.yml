@@ -1,0 +1,24 @@
+version: 2.1
+
+orbs:
+  python: circleci/python@0.2.1
+
+jobs:
+  build-and-test:
+    executor: python/default
+    steps:
+      - checkout
+      - python/load-cache
+      - python/install-deps
+      - python/save-cache
+       - run:
+          name: UnitTest
+          command: python ./API/Tests/unit_testing.py
+      - run:
+          name: IntegrationTest
+          command: python ./API/Tests/integration_testing.py
+
+workflows:
+  main:
+    jobs:
+      - build-and-test
