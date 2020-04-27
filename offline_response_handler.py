@@ -1,4 +1,4 @@
-from API.response_handler import ResponseHandler
+from response_handler import ResponseHandler
 from flask_restful import Resource
 import json
 

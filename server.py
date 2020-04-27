@@ -1,6 +1,6 @@
 from flask import Flask
 from flask_restful import Api
-from API.response_handler import ResponseHandler
+from response_handler import ResponseHandler
 import requests_cache
 
 
@@ -8,7 +8,6 @@ app = Flask(__name__)
 api = Api(app)
 
 requests_cache.install_cache(cache_name='cache', backend='sqlite')
-
 
 #   Just routing to the ResponseHandler class
 @app.route("/country/name/<string:name>/keys/<string:keys>")

@@ -1,6 +1,6 @@
 import unittest2
 import requests
-from API.response_handler import ResponseHandler
+from response_handler import ResponseHandler
 
 
 class MyTestCase(unittest2.TestCase):

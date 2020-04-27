@@ -1,4 +1,6 @@
-from API.country_info import CountryInfo
+from country_info import CountryInfo
+
+
 class ResponseHandler:
 
     def __init__(self):

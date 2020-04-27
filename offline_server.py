@@ -1,6 +1,6 @@
 from flask import Flask
 from flask_restful import Api
-from API.offline_response_handler import OfflineResponseHandler
+from offline_response_handler import OfflineResponseHandler
 
 app = Flask(__name__)
 api = Api(app)

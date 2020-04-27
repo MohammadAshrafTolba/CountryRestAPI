@@ -1,8 +1,7 @@
 import unittest2
 import json
-from API.response_handler import ResponseHandler
-from API.country_info import CountryInfo
-
+from response_handler import ResponseHandler
+from country_info import CountryInfo
 
 class CountryInfoPlaceHolder:       #   To make tests available offline
     def __init__(self, input):
@@ -49,7 +48,7 @@ class MyTestCase(unittest2.TestCase):
     def test_get_valid_data(self):
         handler = ResponseHandler()
         handler.country_info = CountryInfoPlaceHolder({"capital": "Cairo", "demonym": "Egyptian"})
-        response = handler.get('egypt', 'capital+demonym')
+        response = handler.get('egypt', 'capital,demonym')
         expected = {"capital": "Cairo", "demonym": "Egyptian"}
         self.assertEqual(expected, response)
 
@@ -59,18 +58,18 @@ class MyTestCase(unittest2.TestCase):
     def test_filter_with_valid_keys(self):
         handler = ResponseHandler()
         handler.country_info = CountryInfoPlaceHolder({"capital": "Cairo", "demonym": "Egyptian"})
-        with open('../offline_country_info.json', 'r') as file:
+        with open('offline_country_info.json') as file:
             info = json.load(file)
-        response = handler.filter('capital+demonym', info)
+        response = handler.filter('capital,demonym', info)
         expected = {"capital": "Cairo", "demonym": "Egyptian"}
         self.assertEqual(expected, response)
 
     def test_filter_with_invalid_keys(self):
         handler = ResponseHandler()
         handler.country_info = CountryInfoPlaceHolder({"capital": "Cairo", "demonym": "Egyptian"})
-        with open('../offline_country_info.json', 'r') as file:
+        with open('offline_country_info.json') as file:
             info = json.load(file)
-        response = handler.filter('capital+invalid_key', info)
+        response = handler.filter('capital,invalid_key', info)
         self.assertEqual(handler.invalid_info, response)
 
 
