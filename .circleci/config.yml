@@ -13,10 +13,10 @@ jobs:
       - python/save-cache
       - run:
           name: UnitTest
-          command: python -m unittest Tests.unit_testing
-      - run:
-          name: IntegrationTest
-          command: python -m unittest Tests.integration_testing
+          command: python -m pytest ./Tests/unit_testing.py
+      #- run:
+      #    name: IntegrationTest
+      #    command: python -m pytest ./Tests/integration_testing.py
 
 workflows:
   main:

@@ -3,4 +3,4 @@ requests
 flask
 flask_restful
 requests_cache
-
+pytest
