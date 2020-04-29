@@ -17,9 +17,12 @@ jobs:
       - run:
           name: UnitTest
           command: python -m py.test ./Tests/unit_testing.py && coverage run -m py.test ./Tests/unit_testing.py
-      #- run:
-      #    name: IntegrationTest
-      #    command: python -m py.test ./Tests/integration_testing.py && coverage run -m py.test ./Tests/integration_testing.py
+      - run:
+          name: IntegrationTest
+          command: python -m py.test ./Tests/online_server_integration_testing.py && coverage run -m py.test ./Tests/online_server_integration_testing.py
+      - run:
+          name: IntegrationTest
+          command: python -m py.test ./Tests/offline_server_integration_testing.py && coverage run -m py.test ./Tests/offline_server_integration_testing.py
       - run:
           name: CoverageReport
           command: coverage report -m

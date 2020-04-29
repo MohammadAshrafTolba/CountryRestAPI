@@ -92,6 +92,7 @@ class MyTestCase(unittest2.TestCase):
         requests_cache.install_cache(cache_name='testing-cache', backend='sqlite', expire_after=5)
         response1 = country_info.get_info('egypt')
         response2 = country_info.get_info('egypt')
+        requests_cache.clear()
         self.assertEqual(response1['from cache'], False)
         self.assertEqual(response2['from cache'], True)
 

@@ -11,7 +11,7 @@ class OfflineCountryInfo:
         return egypt_info
 
     def get_egypt_info(self):
-        with open('offline_country_info.json', 'r') as file:
+        with open('../offline_country_info.json', 'r') as file:
             egypt_info = json.load(file)
         return egypt_info
 
@@ -35,7 +35,7 @@ class OfflineResponseHandler(Resource, ResponseHandler):
         return self.offline_data
 
     def filter(self, keys, data):
-        self.keys_list = keys.split('+')
+        self.keys_list = keys.split(',')
         filtered_data = {}
         for i in self.keys_list:
             if i not in data:
