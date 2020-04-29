@@ -20,6 +20,9 @@ jobs:
       #- run:
       #    name: IntegrationTest
       #    command: python -m py.test ./Tests/integration_testing.py && coverage run -m py.test ./Tests/integration_testing.py
+      - run:
+          name: CoverageReport
+          command: coverage report -m
 
 workflows:
   main:
