@@ -12,6 +12,9 @@ jobs:
       - python/install-deps
       - python/save-cache
       - run:
+          name: Coverage
+          command: sudo pip install coverage
+      - run:
           name: UnitTest
           command: python -m py.test ./Tests/unit_testing.py && coverage run -m py.test ./Tests/unit_testing.py
       #- run:
