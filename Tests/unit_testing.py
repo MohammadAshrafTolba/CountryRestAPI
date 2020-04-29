@@ -59,7 +59,7 @@ class MyTestCase(unittest2.TestCase):
     def test_filter_with_valid_keys(self):
         handler = ResponseHandler()
         handler.country_info = CountryInfoPlaceHolder({"capital": "Cairo", "demonym": "Egyptian"})
-        with open('../offline_country_info.json') as file:
+        with open('offline_country_info.json') as file:
             info = json.load(file)
         response = handler.filter('capital,demonym', info)
         expected = {"capital": "Cairo", "demonym": "Egyptian"}
@@ -68,7 +68,7 @@ class MyTestCase(unittest2.TestCase):
     def test_filter_with_invalid_keys(self):
         handler = ResponseHandler()
         handler.country_info = CountryInfoPlaceHolder({"capital": "Cairo", "demonym": "Egyptian"})
-        with open('../offline_country_info.json') as file:
+        with open('offline_country_info.json') as file:
             info = json.load(file)
         response = handler.filter('capital,invalid_key', info)
         self.assertEqual(handler.invalid_info, response)
