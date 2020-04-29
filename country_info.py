@@ -1,5 +1,6 @@
 import requests
-import json
+import ast
+
 
 class CountryInfo:
 
@@ -12,12 +13,24 @@ class CountryInfo:
         url = url.format(name=country_name)
 
         try:
+
         # return the required info ftom the url
             response = requests.get(url)
+            from_cache = False
+
             if response.status_code == 200:
+
                 if response.from_cache:
-                    print("Caching...")
-                return json.loads(response.content)[0]
+                    print("[FROM CACHE]")
+                    from_cache = True
+
+                byte_response = response.content
+                dict = byte_response.decode("UTF-8")
+                response = ast.literal_eval(dict)
+                response = response[0]
+                response['from cache'] = from_cache
+                return response
+
             else:
                 return None
         # checking for requests exceptions

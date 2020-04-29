@@ -2,6 +2,8 @@ import unittest2
 import json
 from response_handler import ResponseHandler
 from country_info import CountryInfo
+import requests_cache
+
 
 class CountryInfoPlaceHolder:       #   To make tests available offline
     def __init__(self, input):
@@ -13,7 +15,6 @@ class MyTestCase(unittest2.TestCase):
 
 
         #   Testing the get_info(name, info) function
-
 
     def test_get_any_info(self):
         handler = ResponseHandler()
@@ -58,7 +59,7 @@ class MyTestCase(unittest2.TestCase):
     def test_filter_with_valid_keys(self):
         handler = ResponseHandler()
         handler.country_info = CountryInfoPlaceHolder({"capital": "Cairo", "demonym": "Egyptian"})
-        with open('offline_country_info.json') as file:
+        with open('../offline_country_info.json') as file:
             info = json.load(file)
         response = handler.filter('capital,demonym', info)
         expected = {"capital": "Cairo", "demonym": "Egyptian"}
@@ -67,7 +68,7 @@ class MyTestCase(unittest2.TestCase):
     def test_filter_with_invalid_keys(self):
         handler = ResponseHandler()
         handler.country_info = CountryInfoPlaceHolder({"capital": "Cairo", "demonym": "Egyptian"})
-        with open('offline_country_info.json') as file:
+        with open('../offline_country_info.json') as file:
             info = json.load(file)
         response = handler.filter('capital,invalid_key', info)
         self.assertEqual(handler.invalid_info, response)
@@ -83,5 +84,17 @@ class MyTestCase(unittest2.TestCase):
         self.assertEqual(response, None)
 
 
+        #   Testing the caching mechainsm
+
+
+    def test_get_from_cache(self):
+        country_info = CountryInfo()
+        requests_cache.install_cache(cache_name='testing-cache', backend='sqlite', expire_after=5)
+        response1 = country_info.get_info('egypt')
+        response2 = country_info.get_info('egypt')
+        self.assertEqual(response1['from cache'], False)
+        self.assertEqual(response2['from cache'], True)
+
 if __name__ == '__main__':
+
     unittest2.main()
