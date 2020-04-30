@@ -11,7 +11,7 @@ class OfflineCountryInfo:
         return egypt_info
 
     def get_egypt_info(self):
-        with open('../offline_country_info.json', 'r') as file:
+        with open('offline_country_info.json', 'r') as file:
             egypt_info = json.load(file)
         return egypt_info
 
