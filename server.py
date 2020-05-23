@@ -10,6 +10,10 @@ requests_cache.install_cache(cache_name='cache', backend='sqlite', expire_after=
 
 #   Just routing to the ResponseHandler class
 
+@app.route('/')
+def index():
+    return '<h1>Welcome</h1>'
+
 @app.route("/country/name/<string:name>/keys/")
 @app.route("/country/name/<string:name>/")
 def route_scenario_1(name):
