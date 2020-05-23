@@ -24,11 +24,11 @@ class CountryInfo:
                     print("[FROM CACHE]")
                     from_cache = True
 
-                byte_response = response.content
-                dict = byte_response.decode("UTF-8")
-                response = ast.literal_eval(dict)
-                response = response[0]
-                response['from cache'] = from_cache
+                #byte_response = response.content
+                #dict = byte_response.decode("UTF-8")
+                response = response.json()[0]
+                cache_status = {'from cache': from_cache}
+                response.update(cache_status)
                 return response
 
             else:
