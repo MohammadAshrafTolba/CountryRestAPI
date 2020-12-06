@@ -1,6 +1,6 @@
 # CountryRestAPI
 ## URL
-https://trial-for-deployment.herokuapp.com/
+https://fast-country-rest-api.herokuapp.com/
 ## Usage
 Get all country's info
 ```bash
