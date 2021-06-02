@@ -37,7 +37,7 @@ requests-cache==0.5.2
 six==1.15.0
 traceback2==1.4.0
 unittest2==1.1.0
-urllib3==1.25.9
+urllib3==1.26.5
 wcwidth==0.1.9
 Werkzeug==1.0.1
 zipp==3.1.0
